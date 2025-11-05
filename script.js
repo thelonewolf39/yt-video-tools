@@ -1,4 +1,4 @@
-const { createFFmpeg, fetchFile } = FFmpeg;
+const { createFFmpeg, fetchFile } = FFmpegWASM;
 const ffmpeg = createFFmpeg({ log: true });
 const fileInput = document.getElementById('fileInput');
 const compressBtn = document.getElementById('compressBtn');
@@ -13,13 +13,12 @@ compressBtn.addEventListener('click', async () => {
     return;
   }
 
-  statusEl.textContent = "Loading FFmpeg (this may take a few seconds)...";
+  statusEl.textContent = "Loading FFmpeg (first time takes a bit)...";
   await ffmpeg.load();
 
-  statusEl.textContent = "Compressing video... (please wait)";
+  statusEl.textContent = "Compressing video... 🔥";
   ffmpeg.FS('writeFile', 'input.mp4', await fetchFile(file));
 
-  // The CRF controls quality: 18–28 is a good range (28 = smaller file)
   await ffmpeg.run('-i', 'input.mp4', '-vcodec', 'libx264', '-crf', '28', '-preset', 'fast', '-acodec', 'aac', 'output.mp4');
 
   const data = ffmpeg.FS('readFile', 'output.mp4');
@@ -28,5 +27,5 @@ compressBtn.addEventListener('click', async () => {
 
   preview.src = videoUrl;
   downloadLink.href = videoUrl;
-  statusEl.textContent = "Done! 🎉 Your video is ready.";
+  statusEl.textContent = "Done! 🎉 Ready to download.";
 });
