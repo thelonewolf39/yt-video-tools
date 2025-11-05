@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HowlPress – Video Compressor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>🐺 HowlPress</h1>
+    <p>Compress your videos right in the browser — no upload needed!</p>
+
+    <input type="file" id="fileInput" accept="video/*" />
+    <button id="compressBtn">Compress</button>
+
+    <p id="status"></p>
+    <video id="preview" controls></video>
+    <a id="downloadLink" download="compressed.mp4">Download</a>
+  </main>
+
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/ffmpeg.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
